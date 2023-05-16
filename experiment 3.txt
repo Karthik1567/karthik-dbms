@@ -1,0 +1,96 @@
+mysql> use soulesports;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_soulesports |
++-----------------------+
+| matches               |
+| player                |
+| player_stats          |
+| player_team           |
+| player_teams          |
+| players               |
+| sponsorships          |
+| streaming             |
+| teams                 |
+| tournaments           |
++-----------------------+
+10 rows in set (0.00 sec)
+
+mysql> desc  matches;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| match_id       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| match_date     | date         | NO   |     | NULL    |                |
+| match_location | varchar(255) | YES  |     | NULL    |                |
+| team1_id       | int(11)      | NO   | MUL | NULL    |                |
+| team2_id       | int(11)      | NO   | MUL | NULL    |                |
+| team1_score    | int(11)      | YES  |     | NULL    |                |
+| team2_score    | int(11)      | YES  |     | NULL    |                |
+| tournament_id  | int(11)      | YES  | MUL | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+8 rows in set (0.01 sec)
+
+mysql> desc  teams;
++--------------------+--------------+------+-----+---------+----------------+
+| Field              | Type         | Null | Key | Default | Extra
+|
++--------------------+--------------+------+-----+---------+----------------+
+| team_id            | int(11)      | NO   | PRI | NULL    | auto_increment |
+| team_name          | varchar(255) | NO   |     | NULL    |
+|
+| team_region        | varchar(255) | YES  |     | NULL    |
+|
+| team_coach         | varchar(255) | YES  |     | NULL    |
+|
+| team_manager       | varchar(255) | YES  |     | NULL    |
+|
+| team_logo_url      | varchar(255) | YES  |     | NULL    |
+|
+| team_founding_date | date         | YES  |     | NULL    |
+|
++--------------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into teams values(02,"GodLike","India","Jonathan","Gathak","GodL","2020-04-07");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into teams values(03,"Blind","India","Spower","Pyscho","Blind","2020-08-22");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into teams values(04,"IND","India","Snax","punk","IND","2020-12-24");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Thug       | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind
+    | 2020-08-22         |
+|       4 | IND       | India       | Snax       | punk         | IND           | 2020-12-24         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> select team_name from teams;
++-----------+
+| team_name |
++-----------+
+| soul      |
+| GodLike   |
+| Blind     |
+| IND       |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select*from teams where team_name="soul";
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Thug       | Goldy        | Soul          | 2020-05-04         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql>

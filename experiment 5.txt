@@ -1,0 +1,141 @@
+mysql> use soulesports;
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_soulesports |
++-----------------------+
+| matches               |
+| player                |
+| player_stats          |
+| player_team           |
+| player_teams          |
+| players               |
+| sponsorships          |
+| streaming             |
+| teams                 |
+| tournaments           |
++-----------------------+
+10 rows in set (0.00 sec)
+
+mysql> desc  teams;
++--------------------+--------------+------+-----+---------+----------------+
+| Field              | Type         | Null | Key | Default | Extra          |
++--------------------+--------------+------+-----+---------+----------------+
+| team_id            | int(11)      | NO   | PRI | NULL    | auto_increment |
+| team_name          | varchar(255) | NO   |     | NULL    |                |
+| team_region        | varchar(255) | YES  |     | NULL    |                |
+| team_coach         | varchar(255) | YES  |     | NULL    |                |
+| team_manager       | varchar(255) | YES  |     | NULL    |                |
+| team_logo_url      | varchar(255) | YES  |     | NULL    |                |
+| team_founding_date | date         | YES  |     | NULL    |                |
++--------------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.01 sec)
+
+mysql> select*from  teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from teams where team_region= "India";
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select *from teams where team_manager="Goldy";
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql>  alter table teams add player type int(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'type int(3)' at line 1
+mysql> alter table teams add player type int(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'type int(3)' at line 1
+mysql> alter table teams add player type int(225);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'type int(225)' at line 1
+mysql> alter table teams add Playertype int(225);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> update teams set Playertype=T1 where  team_name=" soul";
+ERROR 1054 (42S22): Unknown column 'T1' in 'field list'
+mysql> update teams set Playertype=T1 where team_name="soul";
+ERROR 1054 (42S22): Unknown column 'T1' in 'field list'
+mysql> select*from tables;
+ERROR 1146 (42S02): Table 'soulesports.tables' doesn't exist
+mysql>  select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |       NULL |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |       NULL |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |       NULL |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |       NULL |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update teams Playertype=T1 where team_name="soul";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=T1 where team_name="soul"' at line 1
+mysql> update teams set Playertype="T1" where team_name="soul";
+ERROR 1366 (HY000): Incorrect integer value: 'T1' for column 'Playertype' at row 1
+mysql>  update teams set Playertype="1" where team_name="soul";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update teams set Playertype="2" where team_name="GodLike";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update teams set Playertype="3" where team_name="Blind";e";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+ update teams set Playertype="4" where team_name="IND";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |          3 |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |          4 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql>  select*from teams where team_coach like 'R%';
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select*from teams where team__region like 'I%';
+ERROR 1054 (42S22): Unknown column 'team__region' in 'where clause'
+mysql>  select*from teams where team_region like 'I%';
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |          3 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql>

@@ -1,0 +1,83 @@
+mysql> use soulesports;
+Database changed
+mysql>  select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |          3 |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |          4 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql>  select*from teams where team_coach like 'R%';
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select*from teams where team__region like 'I%';
+ERROR 1054 (42S22): Unknown column 'team__region' in 'where clause'
+mysql>  select*from teams where team_region like 'I%';
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |          3 |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table teams add Playerfavweapon varchar(20);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> update teams set  Playerfavweapon="m416" where team_name="GodLike";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update teams set  Playerfavweapon="ump" where team_name="soul";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update teams set  Playerfavweapon=" Akm" where team_name="Blind";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update teams set  Playerfavweapon="DP28" where team_name="IND";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype | Playerfavweapon |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 | ump             |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 | m416            |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |          3 |  Akm            |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |          4 | DP28            |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select*from teams where Playerfavweapon="m416";
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype | Playerfavweapon |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |          2 | m416            |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> mysql> select*from teams where  Playertype="1";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select*from teams where  Playertype="1"' at line 1
+mysql>  select*from teams where Playertype="1";
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date | Playertype | Playerfavweapon |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |          1 | ump             |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql>

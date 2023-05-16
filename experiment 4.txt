@@ -1,0 +1,42 @@
+mysql> select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Thug       | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |
+|       4 | IND       | India       | Snax       | punk         | IND           | 2020-12-24         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql>  update teams set team_coach="Rahul" where team_id=01;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |
+|       4 | IND       | India       | Snax       | punk         | IND           | 2020-12-24         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql>  update teams set team_region="UK"where team_name="IND";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select*from teams;
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+| team_id | team_name | team_region | team_coach | team_manager | team_logo_url | team_founding_date |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+|       1 | soul      | India       | Rahul      | Goldy        | Soul          | 2020-05-04         |
+|       2 | GodLike   | India       | Jonathan   | Gathak       | GodL          | 2020-04-07         |
+|       3 | Blind     | India       | Spower     | Pyscho       | Blind         | 2020-08-22         |
+|       4 | IND       | UK          | Snax       | punk         | IND           | 2020-12-24         |
++---------+-----------+-------------+------------+--------------+---------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql>
